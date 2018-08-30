@@ -37,6 +37,27 @@
             <button type="submit" class="btn btn-primary btn-md" id="submit-btn">
                 <span class="fa fa-fire"></span>Submit</button>
         </div>
+
+        <!-- modal -->
+        <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Your Results!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>You are most compatible with:<span id="bestMatch">A person!</span></p>
+                </div>
+                <div class="modal-footer">
+                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
     
 
@@ -57,15 +78,16 @@
                 "Your mind is always buzzing with unexplored ideas and plans.",
                 "Generally speaking, you rely more on your experience than your imagination.",
                 "You find it easy to stay relaxed and focused, even when there is some pressure.",
-                "You rarely do something just out of sheer curiosity.",
-                "People can rarely upset you.",
-                "It is often difficult for you to relate to other people’s feelings.",
-                "In a discussion, truth should be more important than people’s sensitivities.",
-                "You rarely get carried away by fantasies and ideas.",
-                "You think that everyone’s views should be respected regardless of whether they are supported by facts or not.",
-                "You feel more energetic after spending time with a group of people."
+                // "You rarely do something just out of sheer curiosity.",
+                // "People can rarely upset you.",
+                // "It is often difficult for you to relate to other people’s feelings.",
+                // "In a discussion, truth should be more important than people’s sensitivities.",
+                // "You rarely get carried away by fantasies and ideas.",
+                // "You think that everyone’s views should be respected regardless of whether they are supported by facts or not.",
+                // "You feel more energetic after spending time with a group of people."
             ];
-
+            
+            var surveyResults = {};
 
             // Render each question to the page
             function renderQuestion() {
@@ -78,16 +100,17 @@
                     $("#questions").append(heading);
                     $("#questions").append(question);
                     
-                    
-                    createDropdown();       
+                    createDropdown(i+1);       
                 }
             }
             
            
             // Create dropdown list 
-            function createDropdown(){
-                var selectBtn = $("<select>").attr("id", "selectBtn");
+            function createDropdown(questionNum){
+                var selectBtn = $("<select>").attr("class", "selectBtn");
+                    selectBtn.attr("data-value", questionNum.toString());
                 var scoreOptions = {
+                    0: "",
                     1: '1',
                     2: '2',
                     3: '3',
@@ -96,7 +119,7 @@
                 };
                 // For each score option, append to select button
                 $.each(scoreOptions, function (val, text) {
-                    $('#selectBtn').append($('<option></option>').val(val).html(text));
+                    selectBtn.append($('<option></option>').val(val).html(text));
                 });
                 // Append select button to questions div
                 $("#questions").append(selectBtn);
@@ -108,26 +131,34 @@
 
             //Function to capture score option selected for each question
                 //push score option to array
+            $(".selectBtn").on("change", function(event){
+                var questionNum = $(this).attr("data-value");
+                var score = event.target.value;
+                surveyResults[questionNum.toString()] = score;
+            })
 
 
 
             // On click event for submit button
             $("#submit-btn").on("click", function (event) {
                 event.preventDefault();
+                console.log(surveyResults);
 
                 // Create new friend object
                 var newFriend = {
                     name: $("#name").val().trim(),
                     photo: $("#photo").val().trim(),
-                    // scores: score array,
+                    scores: surveyResults
                 };
                 console.log(newFriend);
 
-                                                    // how to send newFriend object to friends.js???
+                                                   
                 $.post("/api/survey", newFriend)
                     .then(function (data) {
                         console.log(data);
+                        //data will be result of best match
                         alert("Checking compatibility...");
+                        //decide how to display best match
                     });
 
             });

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Survey</title>
+    <!-- Latest compiled and minified CSS & JS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div>
+            <h1 class="text-left">Survey Questions</h1>
+            <hr>
+            <form>
+                <h3>About You</h3>
+                Name (Required)
+                <br>
+                <input type="text" id="name">
+                <br> Link to photo image (Required)
+                <br>
+                <input type="text" id="photo">
+            </form>
+            
+        </div>
+        <hr>
+        <div id="questions"></div>
+        <br>
+        <div class="text-left">
+            <button type="submit" class="btn btn-primary btn-md" id="submit-btn">
+                <span class="fa fa-fire"></span>Submit</button>
+        </div>
+    </div>
+    
+
+
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //To Do:
+            //fix select btn options bug
+            //grab value of score chosen for each question, push value to scores array
+            //send newFriend data to friends.js
+
+
+            var questions = [
+                "Your mind is always buzzing with unexplored ideas and plans.",
+                "Generally speaking, you rely more on your experience than your imagination.",
+                "You find it easy to stay relaxed and focused, even when there is some pressure.",
+                "You rarely do something just out of sheer curiosity.",
+                "People can rarely upset you.",
+                "It is often difficult for you to relate to other people’s feelings.",
+                "In a discussion, truth should be more important than people’s sensitivities.",
+                "You rarely get carried away by fantasies and ideas.",
+                "You think that everyone’s views should be respected regardless of whether they are supported by facts or not.",
+                "You feel more energetic after spending time with a group of people."
+            ];
+
+
+            // Render each question to the page
+            function renderQuestion() {
+                for (var i = 0; i < (questions.length); i++) {
+
+                    //create head and question, append to questions div
+                    var heading = $("<h3>").text("Question " + (i+1));
+                    var question = $("<p>").text(questions[i]);
+
+                    $("#questions").append(heading);
+                    $("#questions").append(question);
+                    
+                    
+                    createDropdown();       
+                }
+            }
+            
+           
+            // Create dropdown list 
+            function createDropdown(){
+                var selectBtn = $("<select>").attr("id", "selectBtn");
+                var scoreOptions = {
+                    1: '1',
+                    2: '2',
+                    3: '3',
+                    4: '4',
+                    5: '5'
+                };
+                // For each score option, append to select button
+                $.each(scoreOptions, function (val, text) {
+                    $('#selectBtn').append($('<option></option>').val(val).html(text));
+                });
+                // Append select button to questions div
+                $("#questions").append(selectBtn);
+            }
+    
+            renderQuestion();
+
+
+
+            //Function to capture score option selected for each question
+                //push score option to array
+
+
+
+            // On click event for submit button
+            $("#submit-btn").on("click", function (event) {
+                event.preventDefault();
+
+                // Create new friend object
+                var newFriend = {
+                    name: $("#name").val().trim(),
+                    photo: $("#photo").val().trim(),
+                    // scores: score array,
+                };
+                console.log(newFriend);
+
+                                                    // how to send newFriend object to friends.js???
+                $.post("/api/survey", newFriend)
+                    .then(function (data) {
+                        console.log(data);
+                        alert("Checking compatibility...");
+                    });
+
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

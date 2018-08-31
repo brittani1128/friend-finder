@@ -24,9 +24,9 @@
                 Name (Required)
                 <br>
                 <input type="text" id="name" class="input">
-                <br> Link to photo image (Required)
+                <br> Email
                 <br>
-                <input type="text" id="photo" class="input">
+                <input type="email" id="email" class="input">
             </form>
             
         </div>
@@ -34,12 +34,14 @@
         <div id="questions"></div>
         <br>
         <div class="text-left">
-            <button type="submit" class="btn btn-primary btn-md" id="submit-btn" data-toggle="modal" data-target="#modal">
+            <button type="submit" class="btn btn-primary btn-md" id="submit-btn">
                 <span class="fa fa-fire"></span>Submit</button>
         </div>
 
+        <!-- data-toggle="modal" data-target="#modal" -->
+
         <!-- modal -->
-        <div class="modal" tabindex="-1" role="dialog" id="modal">
+        <div class="modal" tabindex="-1" role="dialog" id="modal" style="display:none" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -79,11 +81,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            //To Do:
-            //fix select btn options bug
-            //grab value of score chosen for each question, push value to scores array
-            //send newFriend data to friends.js
-
 
             var questions = [
                 "I love hiking, running, or just being active outdoors",
@@ -100,6 +97,7 @@
             ];
             
             var surveyResults = {};
+            var scoresArr = [];
 
             // Render each question to the page
             function renderQuestion() {
@@ -146,6 +144,7 @@
             $(".selectBtn").on("change", function(event){
                 var questionNum = $(this).attr("data-value");
                 var score = event.target.value;
+                scoresArr.push(score);
                 surveyResults[questionNum.toString()] = score;
             })
 
@@ -154,12 +153,20 @@
             // On click event for submit button
             $("#submit-btn").on("click", function (event) {
                 event.preventDefault();
-                console.log(surveyResults);
+                if ($("#name").val() === ""){
+                    alert("Please enter your name!");
+                    return;
+                }
+                if (scoresArr.length < 5){
+                    alert("Please answer all questions!");
+                    return;
+                }
+                
 
                 // Create new friend object
                 var newFriend = {
                     name: $("#name").val().trim(),
-                    photo: $("#photo").val().trim(),
+                    email: $("#email").val().trim(),
                     scores: surveyResults
                 };
                 console.log("newFriend" + newFriend);
@@ -172,6 +179,8 @@
                      $("#matchType").text(data.type);
                      $("#matchAge").text(data.age);
                      $(".photo").attr("src", data.photo);
+
+                     $("#modal").modal("toggle");
                      differenceArray = [];
                     });
 

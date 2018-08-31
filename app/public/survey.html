@@ -19,14 +19,14 @@
         <div>
             <h1 class="text-left">Survey Questions</h1>
             <hr>
-            <form>
+            <form id="form">
                 <h3>About You</h3>
                 Name (Required)
                 <br>
-                <input type="text" id="name">
+                <input type="text" id="name" class="input">
                 <br> Link to photo image (Required)
                 <br>
-                <input type="text" id="photo">
+                <input type="text" id="photo" class="input">
             </form>
             
         </div>
@@ -34,12 +34,12 @@
         <div id="questions"></div>
         <br>
         <div class="text-left">
-            <button type="submit" class="btn btn-primary btn-md" id="submit-btn">
+            <button type="submit" class="btn btn-primary btn-md" id="submit-btn" data-toggle="modal" data-target="#modal">
                 <span class="fa fa-fire"></span>Submit</button>
         </div>
 
         <!-- modal -->
-        <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal" tabindex="-1" role="dialog" id="modal">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -49,7 +49,18 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <p>You are most compatible with:<span id="bestMatch">A person!</span></p>
+                  <p>We think your furrever friend could be: </p>
+                  <div class="row">
+                      <div class="col-sm-6">
+                        <img src="" class="photo" alt="best match photo">
+                      </div>
+                      <div class="col-sm-6">
+                          <h2 id="matchName"></h2>
+                          <p id="matchType"></p>
+                          <p id="matchAge"></p>
+                      </div>
+                  </div>
+                  
                 </div>
                 <div class="modal-footer">
                   <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
@@ -75,11 +86,12 @@
 
 
             var questions = [
-                "Your mind is always buzzing with unexplored ideas and plans.",
-                "Generally speaking, you rely more on your experience than your imagination.",
-                "You find it easy to stay relaxed and focused, even when there is some pressure.",
-                // "You rarely do something just out of sheer curiosity.",
-                // "People can rarely upset you.",
+                "I love hiking, running, or just being active outdoors",
+                "When I get home from work I want to chill on the couch.",
+                "I live in a house with a large yard.",
+                "I have other pets that would love a new sibling.",
+                "I work long hours each day.",
+                "I have expensive furniture"
                 // "It is often difficult for you to relate to other people’s feelings.",
                 // "In a discussion, truth should be more important than people’s sensitivities.",
                 // "You rarely get carried away by fantasies and ideas.",
@@ -103,19 +115,19 @@
                     createDropdown(i+1);       
                 }
             }
-            
            
             // Create dropdown list 
             function createDropdown(questionNum){
                 var selectBtn = $("<select>").attr("class", "selectBtn");
                     selectBtn.attr("data-value", questionNum.toString());
+                    selectBtn.append($("<option value='' disabled selected></option"))
+                    // <option value="" disabled selected>Select your option</option>
                 var scoreOptions = {
-                    0: "",
-                    1: '1',
-                    2: '2',
-                    3: '3',
-                    4: '4',
-                    5: '5'
+                    1: 1,
+                    2: 2,
+                    3: 3,
+                    4: 4,
+                    5: 5
                 };
                 // For each score option, append to select button
                 $.each(scoreOptions, function (val, text) {
@@ -150,18 +162,24 @@
                     photo: $("#photo").val().trim(),
                     scores: surveyResults
                 };
-                console.log(newFriend);
+                console.log("newFriend" + newFriend);
 
                                                    
                 $.post("/api/survey", newFriend)
                     .then(function (data) {
-                        console.log(data);
-                        //data will be result of best match
-                        alert("Checking compatibility...");
-                        //decide how to display best match
+                        console.log(data)
+                     $("#matchName").text(data.name);
+                     $("#matchType").text(data.type);
+                     $("#matchAge").text(data.age);
+                     $(".photo").attr("src", data.photo);
+                     differenceArray = [];
                     });
 
+                $(".input").val(" ");
+                $(".selectBtn").val(" ");
             });
+
+    
         });
     </script>
 

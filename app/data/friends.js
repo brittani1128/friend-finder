@@ -6,11 +6,11 @@ var friends = [
         photo:"https://via.placeholder.com/150x150",
         scores:[
             5,
-            1,
-            5,
-            5,
             2,
-            1 
+            1,
+            4,
+            4,
+            2 
         ]
    },
    {
@@ -33,10 +33,10 @@ var friends = [
         age:5,
         photo:"https://via.placeholder.com/150x150",
         scores:[
-            1,
             5,
-            3,
-            1,
+            5,
+            5,
+            5,
             5,
             5 
         ]

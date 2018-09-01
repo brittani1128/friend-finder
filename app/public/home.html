@@ -9,34 +9,60 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="style.css"> -->
     <style>
+        body, html{
+            height:100%;
+        }
+        body{
+            background-image: url("http://images2.fanpop.com/image/photos/13600000/Dog-wallpaper-dogs-13632654-1280-800.jpg");
+            height:100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position:relative;
+            
+        }
+        .container{
+            position:relative;
+            top:40%;
+            left:10%;
+            max-width:550px;
+            margin-left:0px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+        }
+        /* .landing{
+            position:relative;
+            top:40%;
+            left:15%;
+        } */
+            
+        
     </style>
 </head>
 
 <body>
 
     <div class="container">
-        <div class="jumbotron">
-            <h1>Friend Finder</h1>
-            <h3 id="intro">Find compatible friends!</h3>
-            <hr>
+        <div class="landing">
+            <h1>Furrever Friend Finder</h1>
+            <h4 id="intro">Take a quick survey to find out which pet is right for you!</h3>
             <a id="viewSurvey" href="/survey">
-                <button class="btn btn-primary btn-lg">
+                <button class="btn btn-secondary btn-lg">
                     <span class="fa fa-smile-o"></span> Go to Survey</button>
             </a>
             <!-- <a href="/">
                 <button class="btn btn-primary btn-lg">
                     <span class="fa fa-th-home"></span> Home</button>
             </a> -->
+            <footer class="footer">
+                <div class="link-container">
+                    <p><a href="/api/survey">API Survey Link</a>  
+                        <!-- <a href="/api/waitlist">API Wait List</a> -->
+                </div>
+            </footer>
         </div>
        
-
-        <footer class="footer">
-            <div class="container">
-                <p><a href="/api/survey">API Survey Link</a>  
-                    <!-- <a href="/api/waitlist">API Wait List</a> -->
-            </div>
-        </footer>
     </div>
     
 

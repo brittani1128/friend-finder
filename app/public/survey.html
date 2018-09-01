@@ -10,32 +10,69 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <style>
+        *{
+            box-sizing: border-box ;
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            background:#fff3d0;
+        }
+
+        #matchPhoto {
+            width: 250px;
+
+            
+        }
+        #matchInfo{
+            text-align:center;
+            padding:15px;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        #pet, #age{
+            font-size: 25px;
+        }
+        .content{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .selectBtn{
+            margin-bottom:10px;
+        }
+        
+
     </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <div>
-            <h1 class="text-left">Survey Questions</h1>
+    <div class="container my-5">
+        <div class="content">
+            <div>
+                <h1 class="text-left">Survey Questions</h1>
+                <hr>
+                <form id="form">
+                    <h3>About You</h3>
+                    Name (Required)
+                    <br>
+                    <input type="text" id="name" class="input">
+                    <br> Email
+                    <br>
+                    <input type="email" id="email" class="input">
+                </form>
+                
+            </div>
             <hr>
-            <form id="form">
-                <h3>About You</h3>
-                Name (Required)
-                <br>
-                <input type="text" id="name" class="input">
-                <br> Email
-                <br>
-                <input type="email" id="email" class="input">
-            </form>
-            
-        </div>
-        <hr>
-        <div id="questions"></div>
-        <br>
-        <div class="text-left">
-            <button type="submit" class="btn btn-primary btn-md" id="submit-btn">
-                <span class="fa fa-fire"></span>Submit</button>
+            <div id="instructions">
+                <h4>Answer these questions to determine which pet would make the best furrever friend!</h4>
+                <p>Choose 1 for Strongly Disagree and 5 for Strongly Agree</p>
+            </div><br>
+            <div id="questions"></div>
+            <br>
+            <div class="text-left">
+                <button type="submit" class="btn btn-secondary btn-md" id="submit-btn">
+                    <span class="fa fa-paw"></span> Submit</button>
+            </div>
         </div>
 
         <!-- data-toggle="modal" data-target="#modal" -->
@@ -54,12 +91,12 @@
                   <p>We think your furrever friend could be: </p>
                   <div class="row">
                       <div class="col-sm-6">
-                        <img src="" class="photo" alt="best match photo">
+                        <img src="" id="matchPhoto" alt="best match photo">
                       </div>
-                      <div class="col-sm-6">
-                          <h2 id="matchName"></h2>
-                          <p id="matchType"></p>
-                          <p id="matchAge"></p>
+                      <div class="col-sm-6" id="matchInfo">
+                          <h2 id="matchName" style="font-weight:bold"></h2>
+                          <p id="pet">Pet: <span id="matchType"></span></p>
+                          <p id="age">Age: <span id="matchAge"></span></p>
                       </div>
                   </div>
                   
@@ -84,16 +121,17 @@
 
             var questions = [
                 "I love hiking, running, or just being active outdoors",
-                "When I get home from work I want to chill on the couch.",
+                "When I get home from work I would rather chill on the couch than get out and about.",
                 "I live in a house with a large yard.",
                 "I have other pets that would love a new sibling.",
                 "I work long hours each day.",
-                "I have expensive furniture"
-                // "It is often difficult for you to relate to other people’s feelings.",
-                // "In a discussion, truth should be more important than people’s sensitivities.",
-                // "You rarely get carried away by fantasies and ideas.",
-                // "You think that everyone’s views should be respected regardless of whether they are supported by facts or not.",
-                // "You feel more energetic after spending time with a group of people."
+                "I have expensive furniture that I don't want destroyed.",
+                "My pet would be around kids regularly",
+                "I want to be able to carry my pet with me wherever I go.",
+                "I travel frequently.",
+                "I don't mind caring for a pet with special needs.",
+                "I have a lot of experience caring for and training dogs.",
+                "I have size and/or breed restrictions at my current residence"
             ];
             
             var surveyResults = {};
@@ -104,8 +142,10 @@
                 for (var i = 0; i < (questions.length); i++) {
 
                     //create head and question, append to questions div
-                    var heading = $("<h3>").text("Question " + (i+1));
+                    var heading = $("<h4>").text("Question " + (i+1));
+                        heading.attr("id", "questionHead");
                     var question = $("<p>").text(questions[i]);
+                        question.attr("id","question");
 
                     $("#questions").append(heading);
                     $("#questions").append(question);
@@ -178,7 +218,7 @@
                      $("#matchName").text(data.name);
                      $("#matchType").text(data.type);
                      $("#matchAge").text(data.age);
-                     $(".photo").attr("src", data.photo);
+                     $("#matchPhoto").attr("src", data.photo);
 
                      $("#modal").modal("toggle");
                      differenceArray = [];

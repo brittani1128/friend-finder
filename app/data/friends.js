@@ -3,58 +3,124 @@ var friends = [
         name:"Ziggy",
         type:"dog",
         age:0.5,
-        photo:"https://via.placeholder.com/150x150",
+        photo:"http://dailyboxer.com/wp-content/uploads/2013/08/cute.jpg",
         scores:[
             5,
-            2,
+            1,
+            5,
+            5,
+            1,
             1,
             4,
+            2,
+            1,
+            2,
             4,
-            2 
+            3
         ]
    },
    {
         name:"Shadow",
         type:"dog",
         age:7,
-        photo:"https://via.placeholder.com/150x150",
+        photo:"http://3.bp.blogspot.com/-ApCaeut0PBs/T_cEMXDTEkI/AAAAAAAACmk/r21_ywL-AkY/s320/mooks.bmp",
         scores:[
-            3,
+            2,
             5,
             3,
             2,
             4,
-             
+            1,
+            5,
+            1,
+            3,
+            3,
+            4,
+            1      
         ]
     },
     {
-        name:"Meow Meow",
-        type:"cat",
-        age:5,
-        photo:"https://via.placeholder.com/150x150",
+        name:"Tito",
+        type:"dog",
+        age:3,
+        photo:"https://g77v3827gg2notadhhw9pew7-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/chihuahua-2726117_1920-e1504816381701.jpg",
         scores:[
+            3,
             5,
+            2,
+            3,
+            4,
             5,
+            4,
             5,
+            4,
             5,
-            5,
+            3,
             5 
         ]
     },
     {
-        name:"Kit Kat",
+        name:"Ms. Pearl",
+        type:"cat",
+        age:9,
+        photo:"https://i.dailymail.co.uk/i/pix/2014/09/08/1410184268404_wps_46_Lesley_Pleasant_s_cat_Osc.jpg",
+        scores:[
+            1,
+            5,
+            2,
+            1,
+            5,
+            4,
+            2,
+            1,
+            5,
+            1,
+            1,
+            5
+
+        ]
+    },
+    {
+        name:"Doug",
         type:"cat",
         age:1,
-        photo:"https://via.placeholder.com/150x150",
+        photo:"https://i0.wp.com/pawsomekitty.com/wp-content/uploads/Best-Outdoor-Cat-House.png?fit=577%2C445&ssl=1",
         scores:[
-            2,
+            3,
             4,
             3,
             4,
             4,
+            2,
+            4,
+            2,
+            4,
+            2,
+            1,
+            5 
+        ]
+    },
+    {
+        name:"Kitty Cohen",
+        type:"cat",
+        age:3,
+        photo:"https://imageserver.petsbest.com/marketing/blog/what-does-my-cats-meowing-mean.jpg",
+        scores:[
+            1,
+            3,
+            1,
+            1,
+            2,
+            1,
+            2,
+            1,
+            4,
+            2,
+            1,
             1 
         ]
-    }
+    },
+   
     
 
 ];

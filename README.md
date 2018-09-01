@@ -1,7 +1,17 @@
-# friend-finder
+# Furrever Friend Finder!
 
-http://bestdogbreedinfo.com/6-month-old-german-shepherd-facts-to-note/6-month-old-german-shepherd-puppy/
+## Project Overview
 
-http://www.seniorpetsnyc.org/2012/07/adopt-mooks-gorgeous-8-year-old-black.html
+The Furrever Friend Finder is a compatibility-based pet finder. The application simulates a real world need of finding the best pet for you to adopt based on your lifestyle. Get started by going to the survey, answer the questions ranked from 1 to 5 based on your agreement, and you'll be matched with the pest pet currently available for adoption!
 
-http://www.vetstreet.com/dogs/chihuahua
+## Usage
+
+Click [here]() to visit the deployed app.
+
+To run on your machine:
+
+```
+git clone https://github.com/brittani1128/friend-finder
+cd friend-finder
+npm install
+```

@@ -6,7 +6,7 @@ The Furrever Friend Finder is a compatibility-based pet finder. The application 
 
 ## Usage
 
-Click [here](https://git.heroku.com/immense-ridge-16573.git) to visit the deployed app.
+Click [here](https://immense-ridge-16573.herokuapp.com/) to visit the deployed app.
 
 To run on your machine:
 
